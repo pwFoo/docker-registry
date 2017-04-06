@@ -1,0 +1,19 @@
+# Caddyfile Documentation can be found at https://caddyserver.com/docs/caddyfile
+
+# Where it says REPLACE, that is where the domain of the registry will be put
+# Where it says EMAIL@DOMAIN.TLD is where the email of the Let's Encrypt user is put
+
+http://REPLACE {
+	redir https://REPLACE{uri}
+}
+
+https://REPLACE {
+	tls EMAIL@DOMAIN.TLD
+	proxy /auth https://auth_server:5001 {
+		transparent
+		insecure_skip_verify
+	}
+	proxy /v2 http://docker_registry:5000 {
+		transparent
+	}
+}

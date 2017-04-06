@@ -1,0 +1,35 @@
+version: 0.1
+
+# Documentation for this configuration file can be found here: https://docs.docker.com/registry/configuration/
+
+log:
+  fields:
+    service: registry
+
+auth:
+  token:
+    realm: https://REPLACE/auth # This needs to change to the domain in use
+    service: Docker registry # This needs to remain the same
+    issuer: Auth Service # This needs to remain the same
+    rootcertbundle: /ssl/server.pem # This needs to remain the same
+
+# This is for Amazon S3, but images can be stored in many different ways.
+# See https://docs.docker.com/registry/configuration/#storagedriver for documentation on the various storage drivers
+storage:
+  s3: # If using S3 then auth info needs to go here
+    accesskey: REPLACE
+    secretkey: REPLACE
+    bucket: REPLACE
+
+http:
+  addr: :5000
+  host: https://REPLACE # This needs to change to the domain in use
+  headers:
+    X-Content-Type-Options: [nosniff]
+  secret: 
+
+health:
+  storagedriver:
+    enabled: true
+    interval: 30s
+    threshold: 4

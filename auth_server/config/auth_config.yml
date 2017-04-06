@@ -1,0 +1,27 @@
+
+# An example auth_config.yml with documentation can be found here: https://github.com/cesanta/docker_auth/blob/master/examples/reference.yml
+
+# Keep this server block the same
+server:
+  addr: ":5001"
+  certificate: "/ssl/server.pem"
+  key: "/ssl/server.key"
+
+# Keep this token block the same
+token:
+  issuer: "Auth Service"
+  expiration: 1200
+
+# Password is specified as a BCrypt hash. Use htpasswd -B to generate.
+users:
+  "admin":
+    password: "$2y$05$DcC2WNj6fM7PBcuyw5m5wSopiuvHvAFdHqLPHnkLTeKDiD4bQS" #REPLACE WITH REAL PASSWORD
+  "": {}
+
+acl:
+  # Admin has full access to everything.
+  - match: {account: "admin"}
+    actions: ["*"]
+  # Anonymous users can pull "hello-world".
+  - match: {account: "", name: "hello-world"}
+    actions: ["pull"]
