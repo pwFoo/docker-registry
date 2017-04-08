@@ -21,7 +21,6 @@ services:
       - "5001"
     volumes:
       - ./auth_server/config:/config:ro
-      - ./auth_server/logs:/logs
       - ./auth_server/ssl:/ssl
     command: /config/auth_config.yml
   docker_registry:
