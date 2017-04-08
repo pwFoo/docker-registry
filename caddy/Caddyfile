@@ -9,6 +9,10 @@ http://REPLACE {
 
 https://REPLACE {
 	tls EMAIL@DOMAIN.TLD
+	log / stdout "{combined}" # output logs to standard out (available via docker-compose logs)
+	timeouts 3m # set timeout to 3mins so that large layers don't fail on push
+				# change this if the too many layers are timing out (in the registry logs this will show as unexpected EOF)
+	maxrequestbody 2GB # max layer size is 2GBs. Change this for larger layers
 	proxy /auth https://auth_server:5001 {
 		transparent
 		insecure_skip_verify

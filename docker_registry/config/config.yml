@@ -27,6 +27,7 @@ http:
   headers:
     X-Content-Type-Options: [nosniff]
   secret: 
+  relativeurls: true # Optional, but recommended if the registry is run on a non-standard port
 
 health:
   storagedriver:
