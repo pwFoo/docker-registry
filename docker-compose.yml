@@ -9,6 +9,8 @@ services:
     depends_on:
       - auth_server
       - docker_registry
+    environment:
+      - ACME_AGREE=true
     ports:
       - "80:80"
       - "443:443"
