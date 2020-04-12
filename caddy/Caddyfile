@@ -3,16 +3,11 @@
 # Where it says REPLACE, that is where the domain of the registry will be put
 # Where it says EMAIL@DOMAIN.TLD is where the email of the Let's Encrypt user is put
 
-http://REPLACE {
-	redir https://REPLACE{uri}
-}
-
-https://REPLACE {
+REPLACE {
 	tls EMAIL@DOMAIN.TLD
 	log / stdout "{combined}" # output logs to standard out (available via docker-compose logs)
 	timeouts 3m # set timeout to 3mins so that large layers don't fail on push
 				# change this if the too many layers are timing out (in the registry logs this will show as unexpected EOF)
-	maxrequestbody 2GB # max layer size is 2GBs. Change this for larger layers
 	proxy /auth https://auth_server:5001 {
 		transparent
 		insecure_skip_verify
